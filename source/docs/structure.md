@@ -13,9 +13,9 @@ The normal setup of OpenLDAP consists of configuration files, setup files (norma
 
 # Files
 
-The `slapd.conf` file is the major point of configuration the database is specified as well as the ACLs.  
+The `slapd.conf` file is the major point of configuration the database is specified as well as the ACLs.  The major parts of slap.d are database connection details, ACL rules, and root admin with password.
 
-abridged
+abridged file list
 ```
 ├── ldap.conf
 ├── schema
@@ -30,7 +30,7 @@ abridged
 
 # Tables 
 
-There are basically four tables that define the back-sql structure.
+There are basically four tables that define the back-sql structure.  
 
 ## ldap_oc_mappings
 
@@ -55,7 +55,6 @@ insert into ldap_oc_mappings (id,name,keytbl,keycol,create_proc,delete_proc,expe
 This table is used to map the attributes of a class to database entries.  
 
 ```
--- attributeType mappings: describe how an attributeType for a certain objectClass maps to the SQL data.
 --  id      a unique number identifying the attribute   
 --  oc_map_id   the value of "ldap_oc_mappings.id" that identifies the objectClass this attributeType is defined for
 --  name        the name of the attributeType; it MUST match the name of an attributeType that is loaded in slapd's schema
@@ -71,12 +70,26 @@ insert into ldap_attr_mappings (id,oc_map_id,name,sel_expr,from_tbls,join_where,
 
 ## ldap_entries
 
+The table provides the first lookup of all entries in the implementation.  The `dn` is used to look up all the entries.  While `oc_attr_mappings` and `ldap_attr_mappings` are set before hand, `ldap_entries` can be changed after a system is in operation either by adding entries using LDAP or by adding entries using SQL.  
+
+```
+--  id          a unique number > 0 identifying the entry
+--  dn          the DN of the entry, in "pretty" form
+--  oc_map_id   the "ldap_oc_mappings.id" of the main objectClass of this entry (view it as the structuralObjectClass)
+--  parent      the "ldap_entries.id" of the parent of this objectClass; 0 if it is the "suffix" of the database
+--  keyval      the value of the "keytbl.keycol" defined for this objectClass
+```
+
 
 ## ldap_entry_objclasses
 
+This table provides secondary object classes for entries.  Not useful for our basic needs but would be used to provide deeper functionality.  
 
----
-
+Columns in table
+```
+--  entry_id    the "ldap_entries.id" of the entry this objectClass value must be added
+--  oc_name     the name of the objectClass; it MUST match the name of an objectClass that is loaded in slapd's schema
+```
 
 ---
 

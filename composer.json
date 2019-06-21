@@ -8,5 +8,7 @@
         "psr-4": {
             "App\\Listeners\\": "listeners/"
         }
-    }
+    },
+"minimum-stability": "dev",
+"prefer-stable" : true
 }

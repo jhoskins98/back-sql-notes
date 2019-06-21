@@ -23,3 +23,8 @@ Invaluable gist by mahirrudin https://gist.github.com/mahirrudin/9b7754e54f1e8e5
 # Other Resources
 
 Test LDAP server at forumsys- [post about it](https://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/) 
+
+
+# One quick note about copyright
+
+My copyright at the bottom is to signify that I wrote it and want to represent it that way.  Please feel free to use this content with attribution.  I don't wan to be in the position where someone tries to either take credit or try and block dissemination.  

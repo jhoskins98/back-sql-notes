@@ -18,6 +18,7 @@ return [
         'url' => 'notes/notes-general',
         'children' => [
             'Embedded Example' => 'notes/embedded-example',
+            'Adding LDAP to WordPress' => 'notes/adding-ldap-wordpress',
             'Building Example' => 'notes/building-example',
             'Using SQL Views Example' => 'notes/using-sql-views-example',
 
